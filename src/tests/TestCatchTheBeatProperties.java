@@ -61,4 +61,30 @@ public class TestCatchTheBeatProperties {
         ctb.setHyperDashFruit(GREEN);
         assertEquals(GREEN, ctb.getHyperDashFruit());
     }
+    
+    @Test
+    public void testEqualsObject_Object_False() {
+    	assertFalse(ctb.equals(new Object()));
+    }
+
+    @Test
+    public void testEqualsObject_Null_False() {
+    	assertFalse(ctb.equals(null));
+    }
+
+    @Test
+    public void testEqualsObject_Itself_True() {
+    	assertTrue(ctb.equals(ctb));
+    }
+
+    @Test
+    public void testEqualsObject_OtherWithSameValues_True() {
+    	assertTrue(ctb.equals(new CatchTheBeatProperties()));
+    }
+    
+    @Test
+    public void testEqualsObject_OtherWithDifferentValues_False() {
+    	ctb.setHyperDash(new Color(0, 0, 2, 254));
+    	assertFalse(ctb.equals(new CatchTheBeatProperties()));
+    }
 }

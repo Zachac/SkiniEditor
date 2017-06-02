@@ -143,4 +143,29 @@ public class TestFontsProperties {
         assertEquals(fonts.getComboOverlap(), 3);
     }
 
+    @Test
+    public void testEqualsObject_Object_False() {
+    	assertFalse(fonts.equals(new Object()));
+    }
+
+    @Test
+    public void testEqualsObject_Null_False() {
+    	assertFalse(fonts.equals(null));
+    }
+
+    @Test
+    public void testEqualsObject_Itself_True() {
+    	assertTrue(fonts.equals(fonts));
+    }
+
+    @Test
+    public void testEqualsObject_OtherWithSameValues_True() {
+    	assertTrue(fonts.equals(new FontsProperties()));
+    }
+    
+    @Test
+    public void testEqualsObject_OtherWithDifferentValues_False() {
+    	fonts.setComboPrefix("diff-prefix-");
+    	assertFalse(fonts.equals(new FontsProperties()));
+    }
 }

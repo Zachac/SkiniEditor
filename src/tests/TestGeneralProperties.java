@@ -267,4 +267,29 @@ public class TestGeneralProperties {
         assertEquals(general.getCustomComboBurstSounds().size(), 0);
     }
 
+    @Test
+    public void testEqualsObject_Object_False() {
+    	assertFalse(general.equals(new Object()));
+    }
+
+    @Test
+    public void testEqualsObject_Null_False() {
+    	assertFalse(general.equals(null));
+    }
+
+    @Test
+    public void testEqualsObject_Itself_True() {
+    	assertTrue(general.equals(general));
+    }
+
+    @Test
+    public void testEqualsObject_OtherWithSameValues_True() {
+    	assertTrue(general.equals(new GeneralProperties()));
+    }
+    
+    @Test
+    public void testEqualsObject_OtherWithDifferentValues_False() {
+    	general.setName("Another Name That is Different");
+    	assertFalse(general.equals(new GeneralProperties()));
+    }
 }

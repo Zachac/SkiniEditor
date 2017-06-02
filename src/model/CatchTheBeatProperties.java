@@ -73,4 +73,17 @@ public class CatchTheBeatProperties extends Observable {
         this.setChanged();
         this.notifyObservers();
     }
+
+    @Override
+    public boolean equals(Object other) {
+    	if (!(other instanceof CatchTheBeatProperties)) {
+    		return false;
+    	}
+    	
+    	CatchTheBeatProperties o = (CatchTheBeatProperties) other;
+
+    	return o.hyperDash.equals(hyperDash) && 
+    			o.hyperDashAfterImage.equals(hyperDashAfterImage) && 
+    			o.hyperDashFruit.equals(hyperDashFruit);
+    }
 }

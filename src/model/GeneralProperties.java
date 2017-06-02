@@ -2,6 +2,7 @@ package model;
 
 import java.util.Collections;
 import java.util.Comparator;
+import java.util.Iterator;
 import java.util.LinkedList;
 import java.util.List;
 import java.util.Objects;
@@ -423,5 +424,46 @@ public class GeneralProperties extends Observable {
         customComboBurstSounds.remove(customComboBurstSound);
         this.setChanged();
         this.notifyObservers();
+    }
+
+    @Override
+    public boolean equals(Object other) {
+    	if (!(other instanceof GeneralProperties)) {
+    		return false;
+    	}
+    	
+    	GeneralProperties o = (GeneralProperties) other;
+
+    	Iterator<Integer> oiter = o.customComboBurstSounds.iterator();
+    	Iterator<Integer> iter = customComboBurstSounds.iterator();
+    	
+    	while (oiter.hasNext() && iter.hasNext()) {
+    		if (!oiter.next().equals(iter.next())) {
+    			return false;
+    		}
+    	}
+    	
+    	if (oiter.hasNext() || iter.hasNext()) {
+    		return false;
+    	}
+    	
+    	return o.allowSliderBallTint == allowSliderBallTint &&
+    			o.comboBurstRandom == comboBurstRandom &&
+    			o.animationFramerate == animationFramerate &&
+    			o.author.equals(author)  &&
+    			o.cursorCentre == cursorCentre &&
+    			o.cursorExpand == cursorExpand &&
+    			o.cursorRotate == cursorRotate &&
+    			o.cursorTrailRotate == cursorTrailRotate &&
+    			o.hitCircleOverlayAboveNumber == hitCircleOverlayAboveNumber &&
+    			o.layeredHitSounds == layeredHitSounds &&
+    			o.name.equals(name) &&
+    			o.sliderBallFlip == sliderBallFlip &&
+    			o.sliderBallFrames == sliderBallFrames &&
+    			o.sliderStyle == sliderStyle &&
+    			o.spinnerFadePlayfield == spinnerFadePlayfield &&
+    			o.spinnerFrequencyModulate == spinnerFrequencyModulate &&
+    			o.spinnerNoBlink == spinnerNoBlink &&
+    			o.version == version;
     }
 }

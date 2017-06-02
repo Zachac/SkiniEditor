@@ -1,6 +1,7 @@
 package model;
 
 import java.util.Collections;
+import java.util.Iterator;
 import java.util.LinkedList;
 import java.util.List;
 import java.util.Objects;
@@ -264,5 +265,37 @@ public class ColoursProperties extends Observable {
         this.setChanged();
         this.notifyObservers();
     }
-    
+
+
+    @Override
+    public boolean equals(Object other) {
+    	if (!(other instanceof ColoursProperties)) {
+    		return false;
+    	}
+    	
+    	ColoursProperties o = (ColoursProperties) other;
+
+    	Iterator<Color> oiter = o.comboColors.iterator();
+    	Iterator<Color> iter = comboColors.iterator();
+    	
+    	while (oiter.hasNext() && iter.hasNext()) {
+    		if (!oiter.next().equals(iter.next())) {
+    			return false;
+    		}
+    	}
+    	
+    	if (oiter.hasNext() || iter.hasNext()) {
+    		return false;
+    	}
+    	
+    	return o.inputOverlayText.equals(inputOverlayText) &&
+    			o.menuGlow.equals(menuGlow) &&
+    			o.sliderBall.equals(sliderBall) &&
+    			o.sliderBorder.equals(sliderBorder) &&
+    			(o.sliderTrackOverride == sliderTrackOverride || o.sliderTrackOverride.equals(sliderTrackOverride)) &&
+    			o.songSelectActiveText.equals(songSelectActiveText) &&
+    			o.songSelectInactiveText.equals(songSelectInactiveText) &&
+    			o.spinnerBackground.equals(spinnerBackground) &&
+    			o.starBreakAdditive.equals(starBreakAdditive);
+    }
 }

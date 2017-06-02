@@ -12,7 +12,7 @@ public class TestManiaProperties {
     }
 
     @Test
-    public void test() {
+    public void testEqualsObject() {
         fail("Not yet implemented");
     }
 

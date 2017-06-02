@@ -149,4 +149,19 @@ public class FontsProperties extends Observable {
         this.setChanged();
         this.notifyObservers();
     }
+
+    @Override
+    public boolean equals(Object other) {
+    	if (!(other instanceof FontsProperties)) {
+    		return false;
+    	}
+    	
+    	FontsProperties o = (FontsProperties) other;
+    	return o.comboOverlap == comboOverlap &&
+    			o.hitCircleOverlap == hitCircleOverlap &&
+    			o.scoreOverlap == scoreOverlap &&
+    			o.comboPrefix.equals(comboPrefix) &&
+    			o.hitCirclePrefix.equals(hitCirclePrefix) &&
+    			o.scorePrefix.equals(scorePrefix);
+    }
 }

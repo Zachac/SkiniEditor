@@ -196,4 +196,30 @@ public class TestColoursProperties {
         colors.setInputOverlayText(UNIQUE_COLOR);
         assertEquals(colors.getInputOverlayText(), UNIQUE_COLOR);
     }
+    
+    @Test
+    public void testEqualsObject_Object_False() {
+    	assertFalse(colors.equals(new Object()));
+    }
+
+    @Test
+    public void testEqualsObject_Null_False() {
+    	assertFalse(colors.equals(null));
+    }
+
+    @Test
+    public void testEqualsObject_Itself_True() {
+    	assertTrue(colors.equals(colors));
+    }
+
+    @Test
+    public void testEqualsObject_OtherWithSameValues_True() {
+    	assertTrue(colors.equals(new ColoursProperties()));
+    }
+    
+    @Test
+    public void testEqualsObject_OtherWithDifferentValues_False() {
+    	colors.setInputOverlayText(new Color(0, 0, 2, 254));
+    	assertFalse(colors.equals(new ColoursProperties()));
+    }
 }

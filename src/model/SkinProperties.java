@@ -81,5 +81,22 @@ public class SkinProperties {
         mania.remove(keys);
     }
     
+    /**
+     * Checks
+     */
+    @Override
+    public boolean equals(Object other) {
+    	if (!(other instanceof SkinProperties)) {
+    		return false;
+    	}
+    	
+    	SkinProperties skn = (SkinProperties) other;
+    	
+		return general.equals(skn.general) && 
+				colours.equals(skn.colours) && 
+				fonts.equals(skn.fonts) && 
+				catchTheBeat.equals(skn.catchTheBeat) &&
+				skn.mania.entrySet().equals(mania.entrySet());
+    }
     
 }
