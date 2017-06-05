@@ -8,7 +8,7 @@ import java.util.Observable;
  *
  * @author Zachary Chandler
  */
-public class CatchTheBeatProperties extends Observable {
+public class CatchTheBeatProperties extends Observable implements Properties {
     
     private Color hyperDash;
     private Color hyperDashAfterImage;
@@ -85,5 +85,27 @@ public class CatchTheBeatProperties extends Observable {
     	return o.hyperDash.equals(hyperDash) && 
     			o.hyperDashAfterImage.equals(hyperDashAfterImage) && 
     			o.hyperDashFruit.equals(hyperDashFruit);
+    }
+    
+    @Override
+    public String toString() {
+        StringBuilder result = new StringBuilder();
+
+        result.append("[CatchTheBeat]");
+        result.append('\n');
+        
+        result.append("HyperDash: ");
+        result.append(hyperDash.toString());
+        result.append('\n');
+
+        result.append("HyperDashAfterImage: ");
+        result.append(hyperDashAfterImage.toString());
+        result.append('\n');
+        
+        result.append("HyperDashFruit: ");
+        result.append(hyperDashFruit.toString());
+        result.append('\n');
+        
+        return result.toString();
     }
 }

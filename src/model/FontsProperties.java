@@ -8,7 +8,7 @@ import java.util.Observable;
  *
  * @author Zachary Chandler
  */
-public class FontsProperties extends Observable {
+public class FontsProperties extends Observable implements Properties {
 
     private String hitCirclePrefix;
     private int hitCircleOverlap;
@@ -163,5 +163,39 @@ public class FontsProperties extends Observable {
     			o.comboPrefix.equals(comboPrefix) &&
     			o.hitCirclePrefix.equals(hitCirclePrefix) &&
     			o.scorePrefix.equals(scorePrefix);
+    }
+
+    @Override
+    public String toString() {
+        StringBuilder result = new StringBuilder();
+
+        result.append("[Fonts]");
+        result.append('\n');
+
+        result.append("HitCirclePrefix: ");
+        result.append(hitCirclePrefix.toString());
+        result.append('\n');
+
+        result.append("HitCircleOverlap: ");
+        result.append(hitCircleOverlap);
+        result.append('\n');
+        
+        result.append("ScorePrefix: ");
+        result.append(scorePrefix.toString());
+        result.append('\n');
+
+        result.append("ScoreOverlap: ");
+        result.append(scoreOverlap);
+        result.append('\n');
+        
+        result.append("ComboPrefix: ");
+        result.append(comboPrefix.toString());
+        result.append('\n');
+
+        result.append("ComboOverlap: ");
+        result.append(comboOverlap);
+        result.append('\n');
+        
+        return result.toString();
     }
 }

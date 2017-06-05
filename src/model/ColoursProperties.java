@@ -12,7 +12,7 @@ import java.util.Observable;
  *
  * @author Zachary Chandler
  */
-public class ColoursProperties extends Observable {
+public class ColoursProperties extends Observable implements Properties {
     
     public static final int MAX_COMBO_COLORS = 8;
     
@@ -62,7 +62,7 @@ public class ColoursProperties extends Observable {
      * @throws NullPointerException if c is null.
      * @throws IllegalArgumentException if combo is negative or if it exceeds the maximum combo.
      */
-    public void setComboColor(int combo, Color c) {
+    public void assignComboColor(int combo, Color c) {
         Objects.requireNonNull(c);
         
         if (combo < 0 || combo >= comboColors.size()) {
@@ -297,5 +297,68 @@ public class ColoursProperties extends Observable {
     			o.songSelectInactiveText.equals(songSelectInactiveText) &&
     			o.spinnerBackground.equals(spinnerBackground) &&
     			o.starBreakAdditive.equals(starBreakAdditive);
+    }
+
+
+    @Override
+    public String toString() {
+        StringBuilder result = new StringBuilder();
+
+        result.append("[Colours]");
+        result.append('\n');
+
+        Iterator<Color> iter = comboColors.iterator();
+        
+        int i = 0;
+        while (iter.hasNext()) {
+            i++;
+            result.append("Combo");
+            result.append(i);
+            result.append(": ");
+            result.append(iter.next());
+            result.append('\n');
+        }
+
+        result.append("SliderBorder: ");
+        result.append(sliderBorder);
+        result.append('\n');
+        
+        result.append("MenuGlow: ");
+        result.append(menuGlow);
+        result.append('\n');
+        
+        result.append("SliderBall: ");
+        result.append(sliderBall);
+        result.append('\n');
+
+        result.append("SpinnerBackground: ");
+        result.append(spinnerBackground);
+        result.append('\n');
+        
+        result.append("SongSelectActiveText: ");
+        result.append(songSelectActiveText);
+        result.append('\n');
+        
+        result.append("SongSelectInactiveText: ");
+        result.append(songSelectInactiveText);
+        result.append('\n');
+        
+        result.append("StarBreakAdditive: ");
+        result.append(starBreakAdditive);
+        result.append('\n');
+        
+        if (sliderTrackOverride != null) {
+            result.append("SliderTrackOverride: ");
+            result.append(sliderTrackOverride);
+            result.append('\n');            
+        }
+        
+        result.append("InputOverlayText: ");
+        result.append(inputOverlayText);
+        result.append('\n');
+        
+        
+        
+        return result.toString();
     }
 }

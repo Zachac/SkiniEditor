@@ -8,7 +8,7 @@ import java.util.List;
 import java.util.Objects;
 import java.util.Observable;
 
-public class GeneralProperties extends Observable {
+public class GeneralProperties extends Observable implements Properties {
     
     private static final Comparator<Integer> INT_COMPARATOR = new Comparator<Integer>() {
 
@@ -465,5 +465,104 @@ public class GeneralProperties extends Observable {
     			o.spinnerFrequencyModulate == spinnerFrequencyModulate &&
     			o.spinnerNoBlink == spinnerNoBlink &&
     			o.version == version;
+    }
+
+    @Override
+    public String toString() {
+        StringBuilder result = new StringBuilder();
+
+        result.append("[General]");
+        result.append('\n');
+
+        
+
+        result.append("Name: ");
+        result.append(name);
+        result.append('\n');
+
+        result.append("Author: ");
+        result.append(author);
+        result.append('\n');
+        
+        result.append("Version: ");
+        result.append(version);
+        result.append('\n');
+
+        result.append("SliderBallFlip: ");
+        result.append(sliderBallFlip ? 1 : 0);
+        result.append('\n');
+
+        result.append("SliderBallFrames: ");
+        result.append(sliderBallFrames);
+        result.append('\n');
+
+        result.append("AllowSliderBallTint: ");
+        result.append(allowSliderBallTint ? 1 : 0);
+        result.append('\n');
+        
+        result.append("SliderStyle: ");
+        result.append(sliderStyle ? 1 : 2);
+        result.append('\n');
+
+        result.append("CursorRotate: ");
+        result.append(cursorRotate ? 1 : 0);
+        result.append('\n');
+
+        result.append("CursorExpand: ");
+        result.append(cursorExpand ? 1 : 0);
+        result.append('\n');
+
+        result.append("CursorCentre: ");
+        result.append(cursorCentre ? 1 : 0);
+        result.append('\n');
+
+        result.append("CursorTrailRotate: ");
+        result.append(cursorTrailRotate ? 1 : 0);
+        result.append('\n');
+
+        result.append("HitCircleOverlayAboveNumber: ");
+        result.append(hitCircleOverlayAboveNumber ? 1 : 0);
+        result.append('\n');
+        
+        result.append("SpinnerFrequencyModulate: ");
+        result.append(spinnerFrequencyModulate ? 1 : 0);
+        result.append('\n');
+
+        result.append("LayeredHitSounds: ");
+        result.append(layeredHitSounds ? 1 : 0);
+        result.append('\n');
+
+        result.append("SpinnerFadePlayfield: ");
+        result.append(spinnerFadePlayfield ? 1 : 0);
+        result.append('\n');
+
+        result.append("SpinnerNoBlink: ");
+        result.append(spinnerNoBlink ? 1 : 0);
+        result.append('\n');
+        
+        result.append("AnimationFramerate: ");
+        result.append(animationFramerate);
+        result.append('\n');
+
+        if (!customComboBurstSounds.isEmpty()) {
+            Iterator<Integer> iter = customComboBurstSounds.iterator();
+            result.append("CustomComboBurstSounds: ");
+
+            result.append(iter.next());
+            
+            while (iter.hasNext()) {
+                result.append(", ");
+                result.append(iter.next());
+            }
+            
+            result.append('\n');
+        }
+        
+        result.append("ComboBurstRandom: ");
+        result.append(comboBurstRandom ? 1 : 0);
+        result.append('\n');
+
+        
+        return result.toString();
     }
 }

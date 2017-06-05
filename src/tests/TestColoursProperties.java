@@ -57,13 +57,13 @@ public class TestColoursProperties {
 
     @Test(expected = NullPointerException.class)
     public void testSetComboColor_Null_NullPointerException() {
-        colors.setComboColor(0, null);
+        colors.assignComboColor(0, null);
     }
     
     @Test
     public void testSetComboColor_UniqueColor_ColorIsChanged() {
         assertNotEquals(colors.getComboColors().get(0), UNIQUE_COLOR);
-        colors.setComboColor(0, UNIQUE_COLOR);
+        colors.assignComboColor(0, UNIQUE_COLOR);
         assertEquals(colors.getComboColors().get(0), UNIQUE_COLOR);
     }
 

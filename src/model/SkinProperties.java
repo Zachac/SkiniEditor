@@ -9,7 +9,7 @@ import java.util.TreeMap;
  *
  * @author Zachary Chandler
  */
-public class SkinProperties {
+public class SkinProperties implements Properties {
     
     /** The [General] properties of the file. */
     public final GeneralProperties general;
@@ -97,6 +97,30 @@ public class SkinProperties {
 				fonts.equals(skn.fonts) && 
 				catchTheBeat.equals(skn.catchTheBeat) &&
 				skn.mania.entrySet().equals(mania.entrySet());
+    }
+    
+    @Override
+    public String toString() {
+        StringBuilder result = new StringBuilder();
+
+        result.append(general.toString());
+        result.append('\n');
+        
+        result.append(colours.toString());
+        result.append('\n');
+        
+        result.append(fonts.toString());
+        result.append('\n');
+        
+        result.append(catchTheBeat.toString());
+        result.append('\n');
+        
+        for (ManiaKeyCount k : mania.keySet()) {
+            result.append(mania.get(k).toString());
+            result.append('\n');
+        }
+        
+        return result.toString();
     }
     
 }

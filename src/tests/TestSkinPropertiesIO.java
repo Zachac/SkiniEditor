@@ -3,7 +3,9 @@ package tests;
 import static org.junit.Assert.*;
 
 import java.io.File;
+import java.text.ParseException;
 
+import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
 
@@ -17,24 +19,27 @@ public class TestSkinPropertiesIO {
 	SkinPropertiesIO newFile; 
 	SkinPropertiesIO originalSkini;
 	
-	private static final SkinProperties originalSkiniExpected = getOrignialSkini();
-			
-	
+	private final SkinProperties originalSkiniExpected = getOrignialSkini();
 	
     @Before
     public void setUp() throws Exception {
         newFile = new SkinPropertiesIO(new File("skin.ini"));
         originalSkini = new SkinPropertiesIO(new File("New Skin/skin.ini"));
     }
+    
+    @After
+    public void cleanUp() {
+        new File("skin.ini").delete();
+    }
 
     @Test(expected = NullPointerException.class)
-    public void testSkinPropertiesIO_Null_NullPointerException() {
+    public void testSkinPropertiesIO_Null_NullPointerException() throws ParseException {
         new SkinPropertiesIO(null);
     }
 
     @Test(expected = IllegalArgumentException.class)
-    public void testSkinPropertiesIO_Directory_IllegalArgumentException() {
-        new SkinPropertiesIO(new File("New Skin"));
+    public void testSkinPropertiesIO_Directory_IllegalArgumentException() throws ParseException {
+        new SkinPropertiesIO(new File("New Skin\\"));
     }
 
     @Test
@@ -44,17 +49,65 @@ public class TestSkinPropertiesIO {
     
     @Test
     public void testSkinPropertiesIO_OriginalSkin_AllValuesSet() {
+        assertTrue(originalSkini.getSkinProperties().colours.equals(originalSkiniExpected.colours));
+        assertTrue(originalSkini.getSkinProperties().catchTheBeat.equals(originalSkiniExpected.catchTheBeat));
+        assertTrue(originalSkini.getSkinProperties().fonts.equals(originalSkiniExpected.fonts));
+        assertTrue(originalSkini.getSkinProperties().general.equals(originalSkiniExpected.general));
         assertTrue(originalSkini.getSkinProperties().equals(originalSkiniExpected));
     }
 
     @Test
-    public void testSave() {
-        fail("Not yet implemented");
+    public void testSave_NonExistingFile_IsSaved() throws ParseException {
+        assertFalse(newFile.getSaveLocation().exists());
+        newFile.getSkinProperties().fonts.setComboOverlap(3);
+        newFile.save();
+        assertTrue(newFile.getSaveLocation().exists());
+        
+        SkinPropertiesIO loadedSkin = new SkinPropertiesIO(newFile.getSaveLocation());
+        assertTrue(newFile.getSkinProperties().equals(loadedSkin.getSkinProperties()));
+    }
+    
+    @Test
+    public void testSave_ExistingFile_IsSaved() throws ParseException {
+        assertTrue(originalSkini.getSaveLocation().exists());
+        originalSkini.getSkinProperties().fonts.setComboOverlap(3);
+        originalSkini.save();
+        
+        SkinPropertiesIO loadedSkin = new SkinPropertiesIO(originalSkini.getSaveLocation());
+        assertTrue(originalSkini.getSkinProperties().equals(loadedSkin.getSkinProperties()));
+        
+        originalSkini.getSkinProperties().fonts.setComboOverlap(originalSkiniExpected.fonts.getComboOverlap());
+        originalSkini.save();
+
+        loadedSkin = new SkinPropertiesIO(originalSkini.getSaveLocation());
+        assertTrue(originalSkiniExpected.equals(loadedSkin.getSkinProperties()));
+    }
+
+    @Test(expected = NullPointerException.class)
+    public void testSetSaveLocation_Null_NullPointerException() {
+        originalSkini.setSaveLocation(null);
+    }
+
+    @Test(expected = IllegalArgumentException.class)
+    public void testSetSaveLocation_Directory_NullPointerException() {
+        originalSkini.setSaveLocation(new File("New Skin\\"));
     }
 
     @Test
-    public void testLoad() {
-        fail("Not yet implemented");
+    public void testSetSaveLocation_NonExistingFile_IsSet() {
+        File newLocation = new File("New Skin\\newfile.ini");
+        
+        assertNotEquals(newLocation, originalSkini.getSaveLocation());
+        originalSkini.setSaveLocation(newLocation);
+        assertEquals(newLocation, originalSkini.getSaveLocation());
+    }
+    
+    @Test
+    public void testSetSaveLocation_ExistingFile_IsSet() {
+        File newLocation = new File("New Skin\\skin.ini");
+        assertNotEquals(newLocation, newFile.getSaveLocation());
+        newFile.setSaveLocation(newLocation);
+        assertEquals(newLocation, newFile.getSaveLocation());
     }
     
     public static SkinProperties getOrignialSkini() {
@@ -65,7 +118,7 @@ public class TestSkinPropertiesIO {
 		originalSkiniExpected.general.setSliderBallFlip(false);
 		originalSkiniExpected.general.setSliderBallFrames(10);
 		originalSkiniExpected.general.setAllowSliderBallTint(true);
-		originalSkiniExpected.general.setSliderStyle(false);
+		originalSkiniExpected.general.setSliderStyle(true);
 		originalSkiniExpected.general.setCursorRotate(false);
 		originalSkiniExpected.general.setCursorExpand(false);
 		originalSkiniExpected.general.setCursorCentre(false);
@@ -83,14 +136,14 @@ public class TestSkinPropertiesIO {
 		originalSkiniExpected.general.addCustomComboBurstSound(301);
 		originalSkiniExpected.general.setComboBurstRandom(true);
 		
-		originalSkiniExpected.colours.setComboColor(0, new Color(1, 2, 3));
-		originalSkiniExpected.colours.setComboColor(1, new Color(0, 202, 0, 1));
-		originalSkiniExpected.colours.setComboColor(2, new Color(1, 2, 3, 5));
-		originalSkiniExpected.colours.setComboColor(3, new Color(242,24,57,3));
+		originalSkiniExpected.colours.assignComboColor(0, new Color(1, 2, 3));
+		originalSkiniExpected.colours.assignComboColor(1, new Color(0, 202, 0, 1));
+		originalSkiniExpected.colours.assignComboColor(2, new Color(1, 2, 3, 5));
+		originalSkiniExpected.colours.assignComboColor(3, new Color(242,24,57,3));
 		originalSkiniExpected.colours.addComboColor(new Color(242, 16, 102));
 		originalSkiniExpected.colours.addComboColor(new Color(222, 23, 4, 254));
 		originalSkiniExpected.colours.addComboColor(new Color(1, 2, 3, 4));
-		originalSkiniExpected.colours.addComboColor(new Color(18,274,98));
+		originalSkiniExpected.colours.addComboColor(new Color(18,231,98));
 		originalSkiniExpected.colours.setSliderBorder(new Color(255, 103, 72));
 		originalSkiniExpected.colours.setMenuGlow(new Color(0, 52, 210));
 		originalSkiniExpected.colours.setSliderBall(new Color(170, 182, 18));
@@ -105,11 +158,11 @@ public class TestSkinPropertiesIO {
 		originalSkiniExpected.fonts.setHitCircleOverlap(-23);
 		originalSkiniExpected.fonts.setScorePrefix("scores");
 		originalSkiniExpected.fonts.setScoreOverlap(-22);
-		originalSkiniExpected.fonts.setComboPrefix("soress");
+		originalSkiniExpected.fonts.setComboPrefix("scoress");
 		originalSkiniExpected.fonts.setComboOverlap(-21);
 		
 		originalSkiniExpected.catchTheBeat.setHyperDash(new Color(255, 0, 0, 5));
-		originalSkiniExpected.catchTheBeat.setHyperDashAfterImage(new Color(255, 244, 234));
+		originalSkiniExpected.catchTheBeat.setHyperDashAfterImage(new Color(254, 244, 234));
 		originalSkiniExpected.catchTheBeat.setHyperDashFruit(new Color(224, 214, 204));
 		
 		return originalSkiniExpected;

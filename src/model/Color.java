@@ -19,6 +19,8 @@ public class Color {
     /** The alpha opacity. */
     public final int a;
 
+    private final int hashCode;
+
     /**
      * Create a color with the given values.
      * @throws IllegalArgumentException if r, g, b, or a are negative or exceed 255.
@@ -35,6 +37,8 @@ public class Color {
         this.g = g;
         this.b = b;
         this.a = a;
+        
+        hashCode = (a << 24) + (b << 16) + (g << 8) + (r << 0);
     }
 
     /**
@@ -54,7 +58,27 @@ public class Color {
      * @throws IllegalArgumentException if s isn't in the correct format.
      */
     public static Color parse(String s) {
-        return null;
+        String[] vars = s.split("[\\s]*,[\\s]*");
+        
+        if (vars.length != 4 && vars.length != 3) {
+            throw new IllegalArgumentException("Invalid number of variables to be a color.");
+        }
+        
+        int[] intvars = new int[4];
+        
+        for (int i = 0; i < vars.length; i++) {
+            try {
+                intvars[i] = Integer.parseInt(vars[i]);
+            } catch (NumberFormatException e) {
+                throw new IllegalArgumentException("Expected Integer got " + vars[i]);
+            }
+        }
+        
+        if (vars.length == 3) {
+            intvars[3] = 255;
+        }
+        
+        return new Color(intvars[0], intvars[1], intvars[2], intvars[3]); 
     }
 
     /**
@@ -89,5 +113,10 @@ public class Color {
                 this.g == otherColor.g &&
                 this.b == otherColor.b &&
                 this.a == otherColor.a;
+    }
+    
+    @Override
+    public int hashCode() {
+        return this.hashCode;
     }
 }
