@@ -10,30 +10,30 @@ import java.util.Observable;
  */
 public class CatchTheBeatProperties extends Observable implements Properties {
     
-    private Color hyperDash;
-    private Color hyperDashAfterImage;
-    private Color hyperDashFruit;
+    private MColor hyperDash;
+    private MColor hyperDashAfterImage;
+    private MColor hyperDashFruit;
     
     /**
      * Instantiate a new [CatchTheBeat] properties with default values.
      */
     public CatchTheBeatProperties() {
-        this.setHyperDash(new Color(255, 0, 0));
-        this.setHyperDashFruit(new Color(255, 0, 0));
-        this.setHyperDashAfterImage(new Color(255, 0, 0));
+        this.setHyperDash(new MColor(255, 0, 0));
+        this.setHyperDashFruit(new MColor(255, 0, 0));
+        this.setHyperDashAfterImage(new MColor(255, 0, 0));
     }
     
     /**
      * @return the hyperDash
      */
-    public Color getHyperDash() {
+    public MColor getHyperDash() {
         return hyperDash;
     }
     
     /**
      * @param hyperDash the hyperDash to set
      */
-    public void setHyperDash(Color hyperDash) {
+    public void setHyperDash(MColor hyperDash) {
         Objects.requireNonNull(hyperDash);
         this.hyperDash = hyperDash;
         this.setChanged();
@@ -43,14 +43,14 @@ public class CatchTheBeatProperties extends Observable implements Properties {
     /**
      * @return the hyperDashAfterImage
      */
-    public Color getHyperDashAfterImage() {
+    public MColor getHyperDashAfterImage() {
         return hyperDashAfterImage;
     }
     
     /**
      * @param hyperDashAfterImage the hyperDashAfterImage to set
      */
-    public void setHyperDashAfterImage(Color hyperDashAfterImage) {
+    public void setHyperDashAfterImage(MColor hyperDashAfterImage) {
         Objects.requireNonNull(hyperDashAfterImage);
         this.hyperDashAfterImage = hyperDashAfterImage;
         this.setChanged();
@@ -60,14 +60,14 @@ public class CatchTheBeatProperties extends Observable implements Properties {
     /**
      * @return the hyperDashFruit
      */
-    public Color getHyperDashFruit() {
+    public MColor getHyperDashFruit() {
         return hyperDashFruit;
     }
     
     /**
      * @param hyperDashFruit the hyperDashFruit to set
      */
-    public void setHyperDashFruit(Color hyperDashFruit) {
+    public void setHyperDashFruit(MColor hyperDashFruit) {
         Objects.requireNonNull(hyperDashFruit);
         this.hyperDashFruit = hyperDashFruit;
         this.setChanged();

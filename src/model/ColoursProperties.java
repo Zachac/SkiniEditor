@@ -16,16 +16,16 @@ public class ColoursProperties extends Observable implements Properties {
     
     public static final int MAX_COMBO_COLORS = 8;
     
-    private final List<Color> comboColors;
-    private Color sliderBorder;
-    private Color menuGlow;
-    private Color sliderBall;
-    private Color spinnerBackground;
-    private Color songSelectActiveText;
-    private Color songSelectInactiveText;
-    private Color starBreakAdditive;
-    private Color sliderTrackOverride;
-    private Color inputOverlayText;
+    private final List<MColor> comboColors;
+    private MColor sliderBorder;
+    private MColor menuGlow;
+    private MColor sliderBall;
+    private MColor spinnerBackground;
+    private MColor songSelectActiveText;
+    private MColor songSelectInactiveText;
+    private MColor starBreakAdditive;
+    private MColor sliderTrackOverride;
+    private MColor inputOverlayText;
     
     /**
      * Instantiate a new [Colours] properties with default values.
@@ -33,26 +33,26 @@ public class ColoursProperties extends Observable implements Properties {
     public ColoursProperties() {
         comboColors = new LinkedList<>();
         
-        addComboColor(new Color(255,192,0));
-        addComboColor(new Color(0,202,0 ));
-        addComboColor(new Color(18,124,255));
-        addComboColor(new Color(242,24,57));
+        addComboColor(new MColor(255,192,0));
+        addComboColor(new MColor(0,202,0 ));
+        addComboColor(new MColor(18,124,255));
+        addComboColor(new MColor(242,24,57));
         
-        setSliderBorder(new Color(255,255,255));
-        setMenuGlow(new Color(0,78,155));
-        setSliderBall(new Color(2,170,255 ));
-        setSpinnerBackground(new Color(100, 100, 100));
-        setSongSelectActiveText(new Color(0,0,0));
-        setSongSelectInactiveText(new Color(255, 255, 255));
-        setStarBreakAdditive(new Color(255,182,193));
+        setSliderBorder(new MColor(255,255,255));
+        setMenuGlow(new MColor(0,78,155));
+        setSliderBall(new MColor(2,170,255 ));
+        setSpinnerBackground(new MColor(100, 100, 100));
+        setSongSelectActiveText(new MColor(0,0,0));
+        setSongSelectInactiveText(new MColor(255, 255, 255));
+        setStarBreakAdditive(new MColor(255,182,193));
         setSliderTrackOverride(null);
-        setInputOverlayText(new Color(124,108,246));
+        setInputOverlayText(new MColor(124,108,246));
     }
     
     /**
      * @return an unmodifiable list of comboColors.
      */
-    public List<Color> getComboColors() {
+    public List<MColor> getComboColors() {
         return Collections.unmodifiableList(comboColors);
     }
 
@@ -62,7 +62,7 @@ public class ColoursProperties extends Observable implements Properties {
      * @throws NullPointerException if c is null.
      * @throws IllegalArgumentException if combo is negative or if it exceeds the maximum combo.
      */
-    public void assignComboColor(int combo, Color c) {
+    public void assignComboColor(int combo, MColor c) {
         Objects.requireNonNull(c);
         
         if (combo < 0 || combo >= comboColors.size()) {
@@ -80,7 +80,7 @@ public class ColoursProperties extends Observable implements Properties {
      * @throws NullPointerException if c is null.
      * @throws IllegalArgumentException if the combo colors are already full.
      */
-    public void addComboColor(Color c) {
+    public void addComboColor(MColor c) {
         Objects.requireNonNull(c);
         
         if (comboColors.size() >= MAX_COMBO_COLORS) {
@@ -109,7 +109,7 @@ public class ColoursProperties extends Observable implements Properties {
     /**
      * @return the sliderBorder
      */
-    public Color getSliderBorder() {
+    public MColor getSliderBorder() {
         return sliderBorder;
     }
 
@@ -117,7 +117,7 @@ public class ColoursProperties extends Observable implements Properties {
      * @param sliderBorder the sliderBorder to set
      * @throws NullPointerException if sliderBorder is null.
      */
-    public void setSliderBorder(Color sliderBorder) {
+    public void setSliderBorder(MColor sliderBorder) {
         Objects.requireNonNull(sliderBorder);
         this.sliderBorder = sliderBorder;
         this.setChanged();
@@ -127,7 +127,7 @@ public class ColoursProperties extends Observable implements Properties {
     /**
      * @return the menuGlow
      */
-    public Color getMenuGlow() {
+    public MColor getMenuGlow() {
         return menuGlow;
     }
 
@@ -135,7 +135,7 @@ public class ColoursProperties extends Observable implements Properties {
      * @param menuGlow the menuGlow to set
      * @throws NullPointerException if menuGlow is null.
      */
-    public void setMenuGlow(Color menuGlow) {
+    public void setMenuGlow(MColor menuGlow) {
         Objects.requireNonNull(menuGlow);
         this.menuGlow = menuGlow;
         this.setChanged();
@@ -145,7 +145,7 @@ public class ColoursProperties extends Observable implements Properties {
     /**
      * @return the sliderBall
      */
-    public Color getSliderBall() {
+    public MColor getSliderBall() {
         return sliderBall;
     }
 
@@ -153,7 +153,7 @@ public class ColoursProperties extends Observable implements Properties {
      * @param sliderBall the sliderBall to set
      * @throws NullPointerException if sliderBall is null.
      */
-    public void setSliderBall(Color sliderBall) {
+    public void setSliderBall(MColor sliderBall) {
         Objects.requireNonNull(sliderBall);
         this.sliderBall = sliderBall;
         this.setChanged();
@@ -163,7 +163,7 @@ public class ColoursProperties extends Observable implements Properties {
     /**
      * @return the spinnerBackground
      */
-    public Color getSpinnerBackground() {
+    public MColor getSpinnerBackground() {
         return spinnerBackground;
     }
 
@@ -171,7 +171,7 @@ public class ColoursProperties extends Observable implements Properties {
      * @param spinnerBackground the spinnerBackground to set
      * @throws NullPointerException if spinnerBackground is null.
      */
-    public void setSpinnerBackground(Color spinnerBackground) {
+    public void setSpinnerBackground(MColor spinnerBackground) {
         Objects.requireNonNull(spinnerBackground);
         this.spinnerBackground = spinnerBackground;
         this.setChanged();
@@ -181,7 +181,7 @@ public class ColoursProperties extends Observable implements Properties {
     /**
      * @return the songSelectActiveText
      */
-    public Color getSongSelectActiveText() {
+    public MColor getSongSelectActiveText() {
         return songSelectActiveText;
     }
 
@@ -189,7 +189,7 @@ public class ColoursProperties extends Observable implements Properties {
      * @param songSelectActiveText the songSelectActiveText to set
      * @throws NullPointerException if songSelectActiveText is null.
      */
-    public void setSongSelectActiveText(Color songSelectActiveText) {
+    public void setSongSelectActiveText(MColor songSelectActiveText) {
         Objects.requireNonNull(songSelectActiveText);
         this.songSelectActiveText = songSelectActiveText;
         this.setChanged();
@@ -199,7 +199,7 @@ public class ColoursProperties extends Observable implements Properties {
     /**
      * @return the songSelectInactiveText
      */
-    public Color getSongSelectInactiveText() {
+    public MColor getSongSelectInactiveText() {
         return songSelectInactiveText;
     }
 
@@ -207,7 +207,7 @@ public class ColoursProperties extends Observable implements Properties {
      * @param songSelectInactiveText the songSelectInactiveText to set
      * @throws NullPointerException if songSelectInactiveText is null.
      */
-    public void setSongSelectInactiveText(Color songSelectInactiveText) {
+    public void setSongSelectInactiveText(MColor songSelectInactiveText) {
         Objects.requireNonNull(songSelectInactiveText);
         this.songSelectInactiveText = songSelectInactiveText;
         this.setChanged();
@@ -217,7 +217,7 @@ public class ColoursProperties extends Observable implements Properties {
     /**
      * @return the starBreakAdditive
      */
-    public Color getStarBreakAdditive() {
+    public MColor getStarBreakAdditive() {
         return starBreakAdditive;
     }
 
@@ -225,7 +225,7 @@ public class ColoursProperties extends Observable implements Properties {
      * @param starBreakAdditive the starBreakAdditive to set
      * @throws NullPointerException if starBreakAdditive is null.
      */
-    public void setStarBreakAdditive(Color starBreakAdditive) {
+    public void setStarBreakAdditive(MColor starBreakAdditive) {
         Objects.requireNonNull(starBreakAdditive);
         this.starBreakAdditive = starBreakAdditive;
         this.setChanged();
@@ -235,14 +235,14 @@ public class ColoursProperties extends Observable implements Properties {
     /**
      * @return the sliderTrackOverride
      */
-    public Color getSliderTrackOverride() {
+    public MColor getSliderTrackOverride() {
         return sliderTrackOverride;
     }
 
     /**
      * @param sliderTrackOverride the sliderTrackOverride to set
      */
-    public void setSliderTrackOverride(Color sliderTrackOverride) {
+    public void setSliderTrackOverride(MColor sliderTrackOverride) {
         this.sliderTrackOverride = sliderTrackOverride;
         this.setChanged();
         this.notifyObservers();
@@ -251,7 +251,7 @@ public class ColoursProperties extends Observable implements Properties {
     /**
      * @return the inputOverlayText
      */
-    public Color getInputOverlayText() {
+    public MColor getInputOverlayText() {
         return inputOverlayText;
     }
 
@@ -259,7 +259,7 @@ public class ColoursProperties extends Observable implements Properties {
      * @param inputOverlayText the inputOverlayText to set
      * @throws NullPointerException if inputOverlayText is null.
      */
-    public void setInputOverlayText(Color inputOverlayText) {
+    public void setInputOverlayText(MColor inputOverlayText) {
         Objects.requireNonNull(inputOverlayText);
         this.inputOverlayText = inputOverlayText;
         this.setChanged();
@@ -275,8 +275,8 @@ public class ColoursProperties extends Observable implements Properties {
     	
     	ColoursProperties o = (ColoursProperties) other;
 
-    	Iterator<Color> oiter = o.comboColors.iterator();
-    	Iterator<Color> iter = comboColors.iterator();
+    	Iterator<MColor> oiter = o.comboColors.iterator();
+    	Iterator<MColor> iter = comboColors.iterator();
     	
     	while (oiter.hasNext() && iter.hasNext()) {
     		if (!oiter.next().equals(iter.next())) {
@@ -307,7 +307,7 @@ public class ColoursProperties extends Observable implements Properties {
         result.append("[Colours]");
         result.append('\n');
 
-        Iterator<Color> iter = comboColors.iterator();
+        Iterator<MColor> iter = comboColors.iterator();
         
         int i = 0;
         while (iter.hasNext()) {

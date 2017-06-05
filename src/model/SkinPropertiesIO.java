@@ -220,13 +220,13 @@ public class SkinPropertiesIO {
 
         ColoursProperties colours = (ColoursProperties) p;
         
-        List<Color> combos = colours.getComboColors();
+        List<MColor> combos = colours.getComboColors();
         
         try { 
             if (combos.size() == comboNumber) {                       
-                colours.addComboColor(Color.parse(value));
+                colours.addComboColor(MColor.parse(value));
             } else if (combos.size() > comboNumber) {
-                colours.assignComboColor(comboNumber, Color.parse(value));
+                colours.assignComboColor(comboNumber, MColor.parse(value));
             } else {
                 throw new IllegalArgumentException("Error catching for invalid combo order.");
             }
@@ -260,7 +260,7 @@ public class SkinPropertiesIO {
                         
                         Class<?> param = m.getParameterTypes()[0];
                         
-                        if (param.equals(Color.class)) {
+                        if (param.equals(MColor.class)) {
                             result.put(identifier, new ColorSetter(m));
                         } else if (param.equals(String.class)) {
                             result.put(identifier, new StringSetter(m));
@@ -422,7 +422,7 @@ public class SkinPropertiesIO {
          * @throws IllegalStateException if m does not have only one parameter or if the parameter isn't the right type.
          */
         public ColorSetter(Method m) {
-            if (m.getParameterCount() != 1 || !m.getParameterTypes()[0].equals(Color.class)) {
+            if (m.getParameterCount() != 1 || !m.getParameterTypes()[0].equals(MColor.class)) {
                 throw new IllegalStateException();
             }
             
@@ -432,7 +432,7 @@ public class SkinPropertiesIO {
         @Override
         public void set(Properties p, String value) {
             try {
-                m.invoke(p, Color.parse(value));
+                m.invoke(p, MColor.parse(value));
             } catch (IllegalAccessException | InvocationTargetException e) {
                 throw new IllegalStateException(e.getMessage());
             } catch (IllegalArgumentException e) {

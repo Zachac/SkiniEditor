@@ -5,7 +5,7 @@ import static org.junit.Assert.*;
 import org.junit.Before;
 import org.junit.Test;
 
-import model.Color;
+import model.MColor;
 
 public class TestColor {
 
@@ -15,22 +15,22 @@ public class TestColor {
 
     @Test
     public void testColorIntIntIntInt_AllJustUnderMax_IsCreated() {
-        assertTrue(new Color(255, 255, 255, 255) != null);
+        assertTrue(new MColor(255, 255, 255, 255) != null);
     }
     
     @Test
     public void testColorIntIntIntInt_AllZero_IsCreated() {
-        assertTrue(new Color(0, 0, 0, 0) != null);
+        assertTrue(new MColor(0, 0, 0, 0) != null);
     }
 
     @Test
     public void testColorIntIntInt_AllJustUnderMax_IsCreated() {
-        assertTrue(new Color(255, 255, 255) != null);
+        assertTrue(new MColor(255, 255, 255) != null);
     }
     
     @Test
     public void testColorIntIntInt_AllZero_IsCreated() {
-        assertTrue(new Color(0, 0, 0) != null);
+        assertTrue(new MColor(0, 0, 0) != null);
     }
 
 //    @Test

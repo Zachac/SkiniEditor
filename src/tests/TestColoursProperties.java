@@ -5,12 +5,12 @@ import static org.junit.Assert.*;
 import org.junit.Before;
 import org.junit.Test;
 
-import model.Color;
+import model.MColor;
 import model.ColoursProperties;
 
 public class TestColoursProperties {
 
-    private static final Color UNIQUE_COLOR = new Color(23, 42, 100, 27);
+    private static final MColor UNIQUE_COLOR = new MColor(23, 42, 100, 27);
     
     private ColoursProperties colors;
     private ColoursProperties maxComboColors;
@@ -29,20 +29,20 @@ public class TestColoursProperties {
     @Test
     public void testColoursProperties_StartsWithDefaultValues() {
         assertEquals(colors.getComboColors().size(), 4);
-        assertEquals(colors.getComboColors().get(0), new Color(255,192,0));
-        assertEquals(colors.getComboColors().get(1), new Color(0,202,0 ));
-        assertEquals(colors.getComboColors().get(2), new Color(18,124,255));
-        assertEquals(colors.getComboColors().get(3), new Color(242,24,57));
+        assertEquals(colors.getComboColors().get(0), new MColor(255,192,0));
+        assertEquals(colors.getComboColors().get(1), new MColor(0,202,0 ));
+        assertEquals(colors.getComboColors().get(2), new MColor(18,124,255));
+        assertEquals(colors.getComboColors().get(3), new MColor(242,24,57));
 
-        assertEquals(colors.getSliderBorder(), new Color(255,255,255));
-        assertEquals(colors.getMenuGlow(), new Color(0,78,155));
-        assertEquals(colors.getSliderBall(), new Color(2,170,255 ));
-        assertEquals(colors.getSpinnerBackground(), new Color(100, 100, 100));
-        assertEquals(colors.getSongSelectActiveText(), new Color(0,0,0));
-        assertEquals(colors.getSongSelectInactiveText(), new Color(255, 255, 255));
-        assertEquals(colors.getStarBreakAdditive(), new Color(255,182,193));
+        assertEquals(colors.getSliderBorder(), new MColor(255,255,255));
+        assertEquals(colors.getMenuGlow(), new MColor(0,78,155));
+        assertEquals(colors.getSliderBall(), new MColor(2,170,255 ));
+        assertEquals(colors.getSpinnerBackground(), new MColor(100, 100, 100));
+        assertEquals(colors.getSongSelectActiveText(), new MColor(0,0,0));
+        assertEquals(colors.getSongSelectInactiveText(), new MColor(255, 255, 255));
+        assertEquals(colors.getStarBreakAdditive(), new MColor(255,182,193));
         assertEquals(colors.getSliderTrackOverride(), null);
-        assertEquals(colors.getInputOverlayText(), new Color(124,108,246));
+        assertEquals(colors.getInputOverlayText(), new MColor(124,108,246));
     }
 
     @Test
@@ -219,7 +219,7 @@ public class TestColoursProperties {
     
     @Test
     public void testEqualsObject_OtherWithDifferentValues_False() {
-    	colors.setInputOverlayText(new Color(0, 0, 2, 254));
+    	colors.setInputOverlayText(new MColor(0, 0, 2, 254));
     	assertFalse(colors.equals(new ColoursProperties()));
     }
 }

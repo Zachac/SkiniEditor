@@ -6,11 +6,11 @@ import org.junit.Before;
 import org.junit.Test;
 
 import model.CatchTheBeatProperties;
-import model.Color;
+import model.MColor;
 
 public class TestCatchTheBeatProperties {
 
-    private static final Color GREEN = new Color(0, 255, 0); 
+    private static final MColor GREEN = new MColor(0, 255, 0); 
     
     CatchTheBeatProperties ctb;
     
@@ -21,9 +21,9 @@ public class TestCatchTheBeatProperties {
 
     @Test
     public void testCatchTheBeatProperties_IsInitializedWithDefaultValues() {
-        assertEquals(ctb.getHyperDash(), new Color(255, 0, 0));
-        assertEquals(ctb.getHyperDashAfterImage(), new Color(255, 0, 0));
-        assertEquals(ctb.getHyperDashFruit(), new Color(255, 0, 0));
+        assertEquals(ctb.getHyperDash(), new MColor(255, 0, 0));
+        assertEquals(ctb.getHyperDashAfterImage(), new MColor(255, 0, 0));
+        assertEquals(ctb.getHyperDashFruit(), new MColor(255, 0, 0));
     }
 
     @Test(expected = NullPointerException.class)
@@ -84,7 +84,7 @@ public class TestCatchTheBeatProperties {
     
     @Test
     public void testEqualsObject_OtherWithDifferentValues_False() {
-    	ctb.setHyperDash(new Color(0, 0, 2, 254));
+    	ctb.setHyperDash(new MColor(0, 0, 2, 254));
     	assertFalse(ctb.equals(new CatchTheBeatProperties()));
     }
 }

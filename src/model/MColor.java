@@ -1,11 +1,13 @@
 package model;
 
+import java.awt.Color;
+
 /**
  * A class to represent a color. r,g,b,a values are always between 0 and 255 inclusively.
  *
  * @author Zachary Chandler
  */
-public class Color {
+public class MColor {
 
     /** The red color. */
     public final int r;
@@ -21,11 +23,13 @@ public class Color {
 
     private final int hashCode;
 
+    private final Color awtColor;
+
     /**
      * Create a color with the given values.
      * @throws IllegalArgumentException if r, g, b, or a are negative or exceed 255.
      */
-    public Color(int r, int g, int b, int a) {
+    public MColor(int r, int g, int b, int a) {
         if (r < 0 || r > 255
                 || g < 0 || g > 255
                 || b < 0 || b > 255
@@ -39,13 +43,14 @@ public class Color {
         this.a = a;
         
         hashCode = (a << 24) + (b << 16) + (g << 8) + (r << 0);
+        awtColor = new Color(r, g, b, a);
     }
 
     /**
      * Create a color with the given values and an alpha of 255.
      * @throws IllegalArgumentException if r, g, b, or a are negative or exceed 255.
      */
-    public Color(int r, int g, int b) {
+    public MColor(int r, int g, int b) {
         this(r, g, b, 255);
     }
     
@@ -57,7 +62,7 @@ public class Color {
      * @return a Color with the given values in s
      * @throws IllegalArgumentException if s isn't in the correct format.
      */
-    public static Color parse(String s) {
+    public static MColor parse(String s) {
         String[] vars = s.split("[\\s]*,[\\s]*");
         
         if (vars.length != 4 && vars.length != 3) {
@@ -78,7 +83,7 @@ public class Color {
             intvars[3] = 255;
         }
         
-        return new Color(intvars[0], intvars[1], intvars[2], intvars[3]); 
+        return new MColor(intvars[0], intvars[1], intvars[2], intvars[3]); 
     }
 
     /**
@@ -104,11 +109,11 @@ public class Color {
     
     @Override
     public boolean equals(Object other) {
-        if (!(other instanceof Color)) {
+        if (!(other instanceof MColor)) {
             return false;
         }
         
-        Color otherColor = (Color) other;
+        MColor otherColor = (MColor) other;
         return this.r == otherColor.r &&
                 this.g == otherColor.g &&
                 this.b == otherColor.b &&
@@ -118,5 +123,13 @@ public class Color {
     @Override
     public int hashCode() {
         return this.hashCode;
+    }
+
+    public Color asAwtcolor() {
+        return this.awtColor;
+    }
+
+    public static MColor parse(Color color) {
+        return new MColor(color.getRed(), color.getGreen(), color.getBlue(), color.getAlpha());
     }
 }

@@ -9,7 +9,7 @@ import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
 
-import model.Color;
+import model.MColor;
 import model.SkinProperties;
 import model.SkinPropertiesIO;
 import model.SkinVersion;
@@ -136,23 +136,23 @@ public class TestSkinPropertiesIO {
 		originalSkiniExpected.general.addCustomComboBurstSound(301);
 		originalSkiniExpected.general.setComboBurstRandom(true);
 		
-		originalSkiniExpected.colours.assignComboColor(0, new Color(1, 2, 3));
-		originalSkiniExpected.colours.assignComboColor(1, new Color(0, 202, 0, 1));
-		originalSkiniExpected.colours.assignComboColor(2, new Color(1, 2, 3, 5));
-		originalSkiniExpected.colours.assignComboColor(3, new Color(242,24,57,3));
-		originalSkiniExpected.colours.addComboColor(new Color(242, 16, 102));
-		originalSkiniExpected.colours.addComboColor(new Color(222, 23, 4, 254));
-		originalSkiniExpected.colours.addComboColor(new Color(1, 2, 3, 4));
-		originalSkiniExpected.colours.addComboColor(new Color(18,231,98));
-		originalSkiniExpected.colours.setSliderBorder(new Color(255, 103, 72));
-		originalSkiniExpected.colours.setMenuGlow(new Color(0, 52, 210));
-		originalSkiniExpected.colours.setSliderBall(new Color(170, 182, 18));
-		originalSkiniExpected.colours.setSpinnerBackground(new Color(152, 71, 81));
-		originalSkiniExpected.colours.setSongSelectActiveText(new Color(81, 215, 215));
-		originalSkiniExpected.colours.setSongSelectInactiveText(new Color(0, 2, 44));
-		originalSkiniExpected.colours.setStarBreakAdditive(new Color(11, 23, 45));
-		originalSkiniExpected.colours.setSliderTrackOverride(new Color(22, 33, 4));
-		originalSkiniExpected.colours.setInputOverlayText(new Color(2, 2, 4, 1));
+		originalSkiniExpected.colours.assignComboColor(0, new MColor(1, 2, 3));
+		originalSkiniExpected.colours.assignComboColor(1, new MColor(0, 202, 0, 1));
+		originalSkiniExpected.colours.assignComboColor(2, new MColor(1, 2, 3, 5));
+		originalSkiniExpected.colours.assignComboColor(3, new MColor(242,24,57,3));
+		originalSkiniExpected.colours.addComboColor(new MColor(242, 16, 102));
+		originalSkiniExpected.colours.addComboColor(new MColor(222, 23, 4, 254));
+		originalSkiniExpected.colours.addComboColor(new MColor(1, 2, 3, 4));
+		originalSkiniExpected.colours.addComboColor(new MColor(18,231,98));
+		originalSkiniExpected.colours.setSliderBorder(new MColor(255, 103, 72));
+		originalSkiniExpected.colours.setMenuGlow(new MColor(0, 52, 210));
+		originalSkiniExpected.colours.setSliderBall(new MColor(170, 182, 18));
+		originalSkiniExpected.colours.setSpinnerBackground(new MColor(152, 71, 81));
+		originalSkiniExpected.colours.setSongSelectActiveText(new MColor(81, 215, 215));
+		originalSkiniExpected.colours.setSongSelectInactiveText(new MColor(0, 2, 44));
+		originalSkiniExpected.colours.setStarBreakAdditive(new MColor(11, 23, 45));
+		originalSkiniExpected.colours.setSliderTrackOverride(new MColor(22, 33, 4));
+		originalSkiniExpected.colours.setInputOverlayText(new MColor(2, 2, 4, 1));
 
 		originalSkiniExpected.fonts.setHitCirclePrefix("defaults");
 		originalSkiniExpected.fonts.setHitCircleOverlap(-23);
@@ -161,9 +161,9 @@ public class TestSkinPropertiesIO {
 		originalSkiniExpected.fonts.setComboPrefix("scoress");
 		originalSkiniExpected.fonts.setComboOverlap(-21);
 		
-		originalSkiniExpected.catchTheBeat.setHyperDash(new Color(255, 0, 0, 5));
-		originalSkiniExpected.catchTheBeat.setHyperDashAfterImage(new Color(254, 244, 234));
-		originalSkiniExpected.catchTheBeat.setHyperDashFruit(new Color(224, 214, 204));
+		originalSkiniExpected.catchTheBeat.setHyperDash(new MColor(255, 0, 0, 5));
+		originalSkiniExpected.catchTheBeat.setHyperDashAfterImage(new MColor(254, 244, 234));
+		originalSkiniExpected.catchTheBeat.setHyperDashFruit(new MColor(224, 214, 204));
 		
 		return originalSkiniExpected;
 	}
