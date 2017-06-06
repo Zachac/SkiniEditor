@@ -1,9 +1,6 @@
 package view;
 
-import javax.swing.JLabel;
-
 import java.awt.Color;
-import java.awt.Dimension;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
 import java.lang.reflect.Field;
@@ -13,13 +10,9 @@ import java.util.Objects;
 import java.util.Observable;
 import java.util.Observer;
 
-import javax.swing.Box;
 import javax.swing.BoxLayout;
 import javax.swing.JColorChooser;
 import javax.swing.JPanel;
-import javax.swing.border.CompoundBorder;
-import javax.swing.border.EmptyBorder;
-import javax.swing.border.LineBorder;
 
 import model.MColor;
 import model.Properties;
@@ -36,14 +29,10 @@ public class ColorProperty extends JPanel implements Observer {
     /** SVUID */
     private static final long serialVersionUID = 8251909035387261368L;
     
-    /** The size of the JPanel displaying the color. */
-    private static final Dimension COLOR_SHOWER_MAX_SIZE = new Dimension(100, 15);
-    
-    private String identifier;
     private Field properties;
     private Method setterMethod;
     private Method getterMethod;
-    private JPanel colorShower;
+    private ColorPropertyDisplay colorShower;
     private SkinPropertiesIO currentSkinIO;
     private ColorSetter colorSet;
 
@@ -62,7 +51,6 @@ public class ColorProperty extends JPanel implements Observer {
         
         usr.addObserver(this);
         this.properties = properties;
-        this.identifier = identifier;
 
         if (!Observable.class.isAssignableFrom(properties.getType()) 
                 || !Properties.class.isAssignableFrom(properties.getType())
@@ -70,14 +58,14 @@ public class ColorProperty extends JPanel implements Observer {
             throw new IllegalArgumentException("Invalid field.");
         }
         
-        loadMethods();
-        loadContent();
+        loadMethods(identifier);
+        loadContent(identifier);
     }
 
     /**
      * Loads the getter and setter methods from the properties field.
      */
-    private final void loadMethods() {
+    private final void loadMethods(String identifier) {
         Class<?> c = properties.getType();
         
         for (Method m : c.getMethods()) {
@@ -113,24 +101,13 @@ public class ColorProperty extends JPanel implements Observer {
     /**
      * Load the content of the panel.
      */
-    private final void loadContent() {
+    private final void loadContent(String identifier) {
         this.setAlignmentX(LEFT_ALIGNMENT);
         this.setLayout(new BoxLayout(this, BoxLayout.X_AXIS));
-        this.setBorder(new EmptyBorder(10, 10, 0, 0));
-        this.setMaximumSize(new Dimension(300, 25));
-        
-        colorShower = new JPanel();
-        colorShower.setAlignmentY(TOP_ALIGNMENT);
-        colorShower.setBorder(new CompoundBorder(new LineBorder(Color.BLACK), new LineBorder(Color.WHITE)));
-        colorShower.setMaximumSize(COLOR_SHOWER_MAX_SIZE);
-        colorShower.setPreferredSize(COLOR_SHOWER_MAX_SIZE);
+        this.setMaximumSize(ColorPropertyDisplay.MAX_SIZE);
+
+        colorShower = new ColorPropertyDisplay(identifier);
         colorShower.addMouseListener(new ColorPicker(this));
-        
-        JLabel aLabel = new JLabel(identifier);
-        aLabel.setAlignmentY(TOP_ALIGNMENT);
-        
-        this.add(aLabel);
-        this.add(Box.createHorizontalGlue());
         this.add(colorShower);
     }
 
@@ -155,7 +132,7 @@ public class ColorProperty extends JPanel implements Observer {
     private void updateColor(Observable theProertyField) {
         try {
             MColor c = (MColor) getterMethod.invoke(theProertyField);
-            colorShower.setBackground(c.asAwtcolor());
+            colorShower.setColor(c.asAwtcolor());
         } catch (IllegalAccessException | IllegalArgumentException | InvocationTargetException e) {
             e.printStackTrace();
         }
@@ -169,7 +146,7 @@ public class ColorProperty extends JPanel implements Observer {
             try {
                 Observable newProps = (Observable) properties.get(skin);
                 newProps.addObserver(this);
-                colorShower.setBackground(((MColor) getterMethod.invoke(newProps)).asAwtcolor());
+                colorShower.setColor(((MColor) getterMethod.invoke(newProps)).asAwtcolor());
                 this.colorSet = (c) -> {
                     try {
                         setterMethod.invoke(newProps, c);
@@ -198,7 +175,7 @@ public class ColorProperty extends JPanel implements Observer {
                 e.printStackTrace();
             }
             
-            colorShower.setBackground(getBackground());
+            colorShower.showAsDisabled();
         }
     }
     
@@ -226,7 +203,7 @@ public class ColorProperty extends JPanel implements Observer {
                     e.printStackTrace();
                 }
                  
-                color = JColorChooser.showDialog(arg0.getComponent(), p.identifier, color);
+                color = JColorChooser.showDialog(arg0.getComponent(), p.colorShower.identifier, color);
                 
                 if (color != null) {
                     p.colorSet.set(MColor.parse(color));                        
