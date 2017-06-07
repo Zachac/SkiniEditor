@@ -5,6 +5,7 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.FocusEvent;
 import java.awt.event.FocusListener;
+import java.lang.reflect.Method;
 import java.util.Objects;
 
 import javax.swing.Box;
@@ -20,7 +21,7 @@ import javax.swing.border.EmptyBorder;
  * 
  * @author Zachac
  */
-public class TextBoxProperty extends JPanel {
+public class TextBoxProperty extends JPanel implements Updatable {
 
 	/** SVUID */
 	private static final long serialVersionUID = 3292368098856803671L;
@@ -82,6 +83,7 @@ public class TextBoxProperty extends JPanel {
 	/**
 	 * Update the panel.
 	 */
+	@Override
 	public void update() {
 		textField.setText(get.get().toString());
 	}
@@ -103,5 +105,28 @@ public class TextBoxProperty extends JPanel {
 				textField.setText(get.get().toString());
 			}
 		}
+	}
+	
+
+    /**
+     * Get a TextBoxProperty for the given identifier that will set and update
+     * a property in FontsProperties.
+     * 
+     * @param prop the exact case sensitive name of the property.
+     * @param type the type of identifier, only String or int are allowed
+     */
+    public static TextBoxProperty getTextBoxProperty(UserContext usr, 
+    		Class<?> pHolder, String prop, Class<?> type) {
+
+    	Translator translator = Translator.getTranslator(type);
+    	
+    	Method setter = Main.getMethod(pHolder, "set" + prop, Void.TYPE, type);
+    	
+    	Method getter = Main.getMethod(pHolder, "get" + prop, type);
+    	
+    	Getter get = Getter.getGetter(getter, usr);
+    	Setter set = Setter.getSetter(setter, translator, usr);
+    	
+		return new TextBoxProperty(prop, set, get);
 	}
 }

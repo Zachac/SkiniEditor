@@ -4,6 +4,7 @@ import java.awt.Dimension;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.io.File;
+import java.lang.reflect.Method;
 import java.text.ParseException;
 
 import javax.swing.JFrame;
@@ -78,4 +79,26 @@ public class Main {
         window.setVisible(true);
     }
 
+
+	/**
+	 * Get a method from the parent class with the given method name with the
+	 * given returnType and parameters.
+	 * 
+	 * @throws IllegalArgumentException if the method isn't found.
+	 */
+	public static Method getMethod(Class<?> parentClass, String methodName,
+			Class<?> returnType, Class<?>... parameters) {
+		
+		try {
+			Method result = parentClass.getMethod(methodName, parameters);
+			if (!result.getReturnType().equals(returnType)) {
+				throw new IllegalArgumentException();
+			}
+			
+			return result;
+		} catch (NoSuchMethodException | SecurityException e) {
+			e.printStackTrace();
+			throw new IllegalArgumentException();
+		}
+	}
 }
